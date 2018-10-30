@@ -1,6 +1,6 @@
 package com.github.ccob.bittrex4j.dao;
 
-public enum OrderType {
+public enum OrderDeltaType {
     Open(0),
     Partial(1),
     Filled(2),
@@ -8,8 +8,7 @@ public enum OrderType {
 
     private final long typeId;
 
-     OrderType(long typeId){
+    OrderDeltaType(long typeId) {
          this.typeId = typeId;
-
     }
 }

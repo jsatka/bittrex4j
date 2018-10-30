@@ -85,7 +85,7 @@ package com.github.ccob.bittrex4j.samples;
 
 import com.github.ccob.bittrex4j.BittrexExchange;
 import com.github.ccob.bittrex4j.dao.Fill;
-import com.github.ccob.bittrex4j.dao.OrderType;
+import com.github.ccob.bittrex4j.dao.OrderDeltaType;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -127,13 +127,13 @@ public class ShowRealTimeFills {
             });
 
             bittrexExchange.onOrderStateChange(orderDelta -> {
-                if(orderDelta.getType() == OrderType.Open || orderDelta.getType() == OrderType.Partial){
+                if(orderDelta.getType() == OrderDeltaType.Open || orderDelta.getType() == OrderDeltaType.Partial){
                     System.out.println(String.format("%s order open with id %s, remaining %.04f", orderDelta.getOrder().getExchange(),
                             orderDelta.getOrder().getOrderUuid(),orderDelta.getOrder().getQuantityRemaining()));
-                }else if(orderDelta.getType() == OrderType.Filled ){
+                }else if(orderDelta.getType() == OrderDeltaType.Filled ){
                     System.out.println(String.format("%s order with id %s filled, qty %.04f", orderDelta.getOrder().getExchange(),
                             orderDelta.getOrder().getOrderUuid(),orderDelta.getOrder().getQuantity()));
-                }else if(orderDelta.getType() == OrderType.Cancelled){
+                }else if(orderDelta.getType() == OrderDeltaType.Cancelled){
                     System.out.println(String.format("%s order with id %s cancelled", orderDelta.getOrder().getExchange(),
                             orderDelta.getOrder().getOrderUuid()));
                 }
