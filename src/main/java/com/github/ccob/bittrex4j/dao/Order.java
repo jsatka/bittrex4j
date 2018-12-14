@@ -45,6 +45,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.ZonedDateTime;
+import java.math.BigDecimal;
 
 @JsonIgnoreProperties("Uuid")
 public class Order {
@@ -53,16 +54,16 @@ public class Order {
     private String exchange;
     private String type;
     private Long id;
-    private double quantity;
-    private double quantityRemaining;
-    private double limit;
-    private double reserved;
-    private double reserveRemaining;
-    private double commissionReserved;
-    private double commissionReserveRemaining;
-    private double commissionPaid;
-    private double price;
-    private double pricePerUnit;
+    private BigDecimal quantity;
+    private BigDecimal quantityRemaining;
+    private BigDecimal limit;
+    private BigDecimal reserved;
+    private BigDecimal reserveRemaining;
+    private BigDecimal commissionReserved;
+    private BigDecimal commissionReserveRemaining;
+    private BigDecimal commissionPaid;
+    private BigDecimal price;
+    private BigDecimal pricePerUnit;
     private ZonedDateTime opened;
     private ZonedDateTime closed;
     private ZonedDateTime updated;
@@ -75,20 +76,32 @@ public class Order {
     private String conditionTarget;
 
     @JsonCreator
-    public Order(@JsonProperty("AccountId") @JsonAlias("U") String accountId, @JsonProperty("OrderUuid") @JsonAlias({"OU"}) String orderUuid,
-                 @JsonProperty("I") Long id,
-                 @JsonProperty("Exchange") @JsonAlias("E") String exchange, @JsonProperty("Type") @JsonAlias({"OrderType","OT"})String type,
-                 @JsonProperty("Quantity") @JsonAlias("Q") double quantity, @JsonProperty("QuantityRemaining") @JsonAlias("q") double quantityRemaining,
-                 @JsonProperty("Limit") @JsonAlias("X") double limit, @JsonProperty("Reserved") double reserved,
-                 @JsonProperty("ReserveRemaining") double reserveRemaining, @JsonProperty("CommissionReserved") double commissionReserved,
-                 @JsonProperty("CommissionReserveRemaining") double commissionReserveRemaining, @JsonProperty("CommissionPaid") @JsonAlias({"Commission","n"}) double commissionPaid,
-                 @JsonProperty("Price") @JsonAlias("P") double price, @JsonProperty("PricePerUnit") @JsonAlias("PU") double pricePerUnit,
-                 @JsonProperty("Opened") @JsonAlias({"TimeStamp","Y"}) ZonedDateTime opened, @JsonProperty("Closed") @JsonAlias("C") ZonedDateTime closed,
-                 @JsonProperty("IsOpen") @JsonAlias("i") boolean open, @JsonProperty("Sentinel") String sentinel,
-                 @JsonProperty("CancelInitiated") @JsonAlias("CI") boolean cancelInitiated, @JsonProperty("ImmediateOrCancel") @JsonAlias("K")boolean immediateOrCancel,
-                 @JsonProperty("IsConditional") @JsonAlias("k") boolean conditional, @JsonProperty("Condition") @JsonAlias("J") String condition,
-                 @JsonProperty("ConditionTarget") @JsonAlias("j") String conditionTarget, @JsonProperty("u") ZonedDateTime updated) {
-
+    public Order(@JsonProperty("AccountId") @JsonAlias("U") String accountId,
+                 @JsonProperty("OrderUuid") @JsonAlias("OU") String orderUuid,
+                 @JsonProperty("Id") @JsonAlias("I") Long id,
+                 @JsonProperty("Exchange") @JsonAlias("E") String exchange,
+                 @JsonProperty("OrderType") @JsonAlias({"Type","OT"})String type,
+                 @JsonProperty("Quantity") @JsonAlias("Q") BigDecimal quantity,
+                 @JsonProperty("QuantityRemaining") @JsonAlias("q") BigDecimal quantityRemaining,
+                 @JsonProperty("Limit") @JsonAlias("X") BigDecimal limit,
+                 @JsonProperty("Reserved") BigDecimal reserved,
+                 @JsonProperty("ReserveRemaining") BigDecimal reserveRemaining,
+                 @JsonProperty("CommissionReserved") BigDecimal commissionReserved,
+                 @JsonProperty("CommissionReserveRemaining") BigDecimal commissionReserveRemaining,
+                 @JsonProperty("CommissionPaid") @JsonAlias({"Commission","n"}) BigDecimal commissionPaid,
+                 @JsonProperty("Price") @JsonAlias("P") BigDecimal price,
+                 @JsonProperty("PricePerUnit") @JsonAlias("PU") BigDecimal pricePerUnit,
+                 @JsonProperty("Opened") @JsonAlias({"TimeStamp","Y"}) ZonedDateTime opened,
+                 @JsonProperty("Closed") @JsonAlias("C") ZonedDateTime closed,
+                 @JsonProperty("IsOpen") @JsonAlias("i") boolean open,
+                 @JsonProperty("Sentinel") String sentinel,
+                 @JsonProperty("CancelInitiated") @JsonAlias("CI") boolean cancelInitiated,
+                 @JsonProperty("ImmediateOrCancel") @JsonAlias("K")boolean immediateOrCancel,
+                 @JsonProperty("IsConditional") @JsonAlias("k") boolean conditional,
+                 @JsonProperty("Condition") @JsonAlias("J") String condition,
+                 @JsonProperty("ConditionTarget") @JsonAlias("j") String conditionTarget,
+                 @JsonProperty("Updated") @JsonAlias("u") ZonedDateTime updated) {
+        
         this.accountId = accountId;
         this.orderUuid = orderUuid;
         this.id = id;
@@ -132,43 +145,43 @@ public class Order {
         return type;
     }
 
-    public double getQuantity() {
+    public BigDecimal getQuantity() {
         return quantity;
     }
 
-    public double getQuantityRemaining() {
+    public BigDecimal getQuantityRemaining() {
         return quantityRemaining;
     }
 
-    public double getLimit() {
+    public BigDecimal getLimit() {
         return limit;
     }
 
-    public double getReserved() {
+    public BigDecimal getReserved() {
         return reserved;
     }
 
-    public double getReserveRemaining() {
+    public BigDecimal getReserveRemaining() {
         return reserveRemaining;
     }
 
-    public double getCommissionReserved() {
+    public BigDecimal getCommissionReserved() {
         return commissionReserved;
     }
 
-    public double getCommissionReserveRemaining() {
+    public BigDecimal getCommissionReserveRemaining() {
         return commissionReserveRemaining;
     }
 
-    public double getCommissionPaid() {
+    public BigDecimal getCommissionPaid() {
         return commissionPaid;
     }
 
-    public double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public double getPricePerUnit() {
+    public BigDecimal getPricePerUnit() {
         return pricePerUnit;
     }
 
