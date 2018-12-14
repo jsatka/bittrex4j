@@ -80,7 +80,7 @@ public class Order {
                  @JsonProperty("OrderUuid") @JsonAlias("OU") String orderUuid,
                  @JsonProperty("Id") @JsonAlias("I") Long id,
                  @JsonProperty("Exchange") @JsonAlias("E") String exchange,
-                 @JsonProperty("OrderType") @JsonAlias({"Type","OT"})String type,
+                 @JsonProperty("OrderType") @JsonAlias({"Type","OT"}) String type,
                  @JsonProperty("Quantity") @JsonAlias("Q") BigDecimal quantity,
                  @JsonProperty("QuantityRemaining") @JsonAlias("q") BigDecimal quantityRemaining,
                  @JsonProperty("Limit") @JsonAlias("X") BigDecimal limit,
@@ -96,7 +96,7 @@ public class Order {
                  @JsonProperty("IsOpen") @JsonAlias("i") boolean open,
                  @JsonProperty("Sentinel") String sentinel,
                  @JsonProperty("CancelInitiated") @JsonAlias("CI") boolean cancelInitiated,
-                 @JsonProperty("ImmediateOrCancel") @JsonAlias("K")boolean immediateOrCancel,
+                 @JsonProperty("ImmediateOrCancel") @JsonAlias("K") boolean immediateOrCancel,
                  @JsonProperty("IsConditional") @JsonAlias("k") boolean conditional,
                  @JsonProperty("Condition") @JsonAlias("J") String condition,
                  @JsonProperty("ConditionTarget") @JsonAlias("j") String conditionTarget,
@@ -151,6 +151,10 @@ public class Order {
 
     public BigDecimal getQuantityRemaining() {
         return quantityRemaining;
+    }
+
+    public BigDecimal getQuantityFilled() {
+        return quantity.subtract(quantityRemaining);
     }
 
     public BigDecimal getLimit() {
