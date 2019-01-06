@@ -26,6 +26,7 @@ import com.github.signalr4j.client.ConnectionState;
 import com.github.signalr4j.client.Platform;
 import com.github.signalr4j.client.hubs.HubConnection;
 import com.github.signalr4j.client.hubs.HubProxy;
+import com.github.signalr4j.client.LogLevel;
 import com.google.gson.Gson;
 import com.google.gson.internal.LinkedTreeMap;
 import org.apache.commons.codec.binary.Base64;
@@ -61,6 +62,7 @@ public class BittrexExchange implements AutoCloseable {
 
     private static Logger log = LoggerFactory.getLogger(BittrexExchange.class);
     private static Logger log_sockets = LoggerFactory.getLogger(BittrexExchange.class.getName().concat(".WebSockets"));
+    private LogLevel logLevel;
     private static final String MARKET = "market", MARKETS = "markets", CURRENCY = "currency", CURRENCIES = "currencies", ACCOUNT = "account", PUBLIC="public";
     private static final List<String> terminalErrors = Arrays.asList("INSUFFICIENT_FUNDS","APIKEY_INVALID");
 
@@ -102,7 +104,11 @@ public class BittrexExchange implements AutoCloseable {
     }
 
     public BittrexExchange(String apikey, String secret) throws IOException {
-        this(5,apikey,secret,new HttpFactory());
+        this(5,apikey,secret);
+    }
+
+    public BittrexExchange(String apikey, String secret, LogLevel logLevel) throws IOException {
+        this(5,apikey,secret,new HttpFactory(),logLevel);
     }
 
     public BittrexExchange(int retries) throws IOException {
@@ -110,14 +116,20 @@ public class BittrexExchange implements AutoCloseable {
     }
 
     public BittrexExchange(int retries, String apikey, String secret) throws IOException {
-        this(retries,apikey,secret,new HttpFactory());
+        this(retries,apikey,secret,new HttpFactory(),LogLevel.Verbose);
     }
 
     public BittrexExchange(int retries, String apikey, String secret, HttpFactory httpFactory) throws IOException {
+        this(retries,apikey,secret,httpFactory,LogLevel.Verbose);
+    }
 
+    public BittrexExchange(int retries, String apikey, String secret, HttpFactory httpFactory, LogLevel logLevel) throws IOException {
+
+        this.retries = retries;
         this.apiKeySecret = new ApiKeySecret(apikey,secret);
         this.httpFactory = httpFactory;
-        this.retries = retries;
+        this.logLevel = logLevel;
+        
 
         mapper = new ObjectMapper();
         SimpleModule module = new SimpleModule();
@@ -257,7 +269,7 @@ public class BittrexExchange implements AutoCloseable {
         try {
 
             hubConnection = httpFactory.createHubConnection("https://socket.bittrex.com",null,true,
-                    new SignalRLoggerDecorator(log_sockets));
+                    new SignalRLoggerDecorator(log_sockets, logLevel));
 
             hubConnection.setReconnectOnError(false);
 
@@ -614,7 +626,7 @@ public class BittrexExchange implements AutoCloseable {
 
             if(httpResponse != null){
                 try {
-                    httpResponse.getEntity().getContent().close();
+                    // httpResponse.getEntity().getContent().close();
                     httpResponse.close();
                 } catch (IOException e) {
                     log.debug("Failed to cleanup HttpResponse",e);

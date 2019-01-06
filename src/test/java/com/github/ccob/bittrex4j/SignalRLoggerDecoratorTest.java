@@ -35,7 +35,7 @@ public class SignalRLoggerDecoratorTest {
 
     @Before
     public void setUp(){
-        signalRLoggerDecorator = new SignalRLoggerDecorator(mockLogger);
+        signalRLoggerDecorator = new SignalRLoggerDecorator(mockLogger, LogLevel.Verbose);
     }
 
     @Test
