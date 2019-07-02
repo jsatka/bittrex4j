@@ -3,3 +3,4 @@ build/
 .idea/
 bittrex4j.iml
 out/
+bin/

@@ -15,8 +15,10 @@ import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ExchangeSummaryState extends Deltas<MarketSummary> {
-    public ExchangeSummaryState(@JsonProperty("Nounce") @JsonAlias("N") long nounce,
-                                @JsonProperty("Deltas") @JsonAlias("D") MarketSummary[] deltas) {
+    public ExchangeSummaryState(
+        @JsonProperty("Nounce") @JsonAlias("N") long nounce,
+        @JsonProperty("Deltas") @JsonAlias("D") MarketSummary[] deltas
+    ) {
         super(nounce, deltas);
     }
 }

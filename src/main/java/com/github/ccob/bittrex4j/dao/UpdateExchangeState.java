@@ -23,9 +23,13 @@ public class UpdateExchangeState  {
     Fill[] fills;
 
     @JsonCreator
-    public UpdateExchangeState(@JsonProperty("MarketName") @JsonAlias("M") String marketName, @JsonProperty("Nounce") @JsonAlias("N") long nounce,
-                               @JsonProperty("Buys") @JsonAlias("Z") MarketOrder[] buys, @JsonProperty("Sells")  @JsonAlias("S") MarketOrder[] sells,
-                               @JsonProperty("f") Fill[] fills) {
+    public UpdateExchangeState(
+        @JsonProperty("MarketName") @JsonAlias("M") String marketName,
+        @JsonProperty("Nounce") @JsonAlias("N") long nounce,
+        @JsonProperty("Buys") @JsonAlias("Z") MarketOrder[] buys,
+        @JsonProperty("Sells")  @JsonAlias("S") MarketOrder[] sells,
+        @JsonProperty("f") Fill[] fills
+    ) {
         this.marketName = marketName;
         this.nounce = nounce;
         this.buys = buys;

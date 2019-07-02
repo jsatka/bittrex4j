@@ -18,9 +18,11 @@ import com.github.signalr4j.client.Logger;
 public class SignalRLoggerDecorator implements Logger {
 
     org.slf4j.Logger log;
+    LogLevel loggingLevel;
 
-    SignalRLoggerDecorator(org.slf4j.Logger log) {
+    SignalRLoggerDecorator(org.slf4j.Logger log, LogLevel loggingLevel) {
         this.log = log;
+        this.loggingLevel = loggingLevel;
     }
 
     @Override
@@ -30,10 +32,15 @@ public class SignalRLoggerDecorator implements Logger {
                 log.error(message);
                 break;
             case Information:
-                log.info(message);
+                if (this.loggingLevel == LogLevel.Verbose ||
+                    this.loggingLevel == LogLevel.Information) {
+                    log.info(message);
+                }
                 break;
             case Verbose:
-                log.debug(message);
+                if (this.loggingLevel == LogLevel.Verbose) {
+                    log.debug(message);
+                }
                 break;
         }
     }

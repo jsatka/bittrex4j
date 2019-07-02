@@ -15,25 +15,26 @@ import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.time.ZonedDateTime;
+import java.math.BigDecimal;
+import java.time.Instant;
 
 public class Balance {
     private String currency;
-    private double balance;
-    private double available;
-    private double pending;
+    private BigDecimal balance;
+    private BigDecimal available;
+    private BigDecimal pending;
     private String cryptoAddress;
     private boolean requested;
     private String uuid;
-    private ZonedDateTime updated;
+    private Instant updated;
     private Boolean autoSell;
     private Long accountId;
 
     @JsonCreator
-    public Balance(@JsonProperty("AccountId") @JsonAlias("W") Long accountId, @JsonProperty("Currency") @JsonAlias("c") String currency, @JsonProperty("Balance") @JsonAlias("b") double balance,
-                   @JsonProperty("Available") @JsonAlias("a") double available, @JsonProperty("Pending") @JsonAlias("z") double pending,
+    public Balance(@JsonProperty("AccountId") @JsonAlias("W") Long accountId, @JsonProperty("Currency") @JsonAlias("c") String currency, @JsonProperty("Balance") @JsonAlias("b") BigDecimal balance,
+                   @JsonProperty("Available") @JsonAlias("a") BigDecimal available, @JsonProperty("Pending") @JsonAlias("z") BigDecimal pending,
                    @JsonProperty("CryptoAddress") @JsonAlias("p") String cryptoAddress, @JsonProperty("Requested") @JsonAlias("r") boolean requested,
-                   @JsonProperty("Uuid") @JsonAlias("U") String uuid, @JsonProperty("u") ZonedDateTime updated, @JsonProperty("h") Boolean autoSell) {
+                   @JsonProperty("Uuid") @JsonAlias("U") String uuid, @JsonProperty("u") Instant updated, @JsonProperty("h") Boolean autoSell) {
         this.currency = currency;
         this.balance = balance;
         this.available = available;
@@ -50,15 +51,15 @@ public class Balance {
         return currency;
     }
 
-    public double getBalance() {
+    public BigDecimal getBalance() {
         return balance;
     }
 
-    public double getAvailable() {
+    public BigDecimal getAvailable() {
         return available;
     }
 
-    public double getPending() {
+    public BigDecimal getPending() {
         return pending;
     }
 
@@ -74,7 +75,7 @@ public class Balance {
         return uuid;
     }
 
-    public ZonedDateTime getUpdated() {
+    public Instant getUpdated() {
         return updated;
     }
 

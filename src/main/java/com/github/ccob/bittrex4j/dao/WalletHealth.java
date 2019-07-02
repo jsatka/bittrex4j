@@ -14,7 +14,7 @@ package com.github.ccob.bittrex4j.dao;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.time.ZonedDateTime;
+import java.time.Instant;
 
 public class WalletHealth {
     private  String currency;
@@ -24,14 +24,14 @@ public class WalletHealth {
     private int walletBalance;
     private int walletConnections;
     private int minutesSinceBHUpdated;
-    private ZonedDateTime lastChecked;
+    private Instant lastChecked;
     private boolean isActive;
 
     @JsonCreator
     public WalletHealth(@JsonProperty("Currency") String currency, @JsonProperty("DepositQueueDepth") int depositQueueDepth, @JsonProperty("WithdrawQueueDepth") int withdrawQueueDepth,
                         @JsonProperty("BlockHeight") long blockHeight, @JsonProperty("WalletBalance") int walletBalance,
                         @JsonProperty("WalletConnections") int walletConnections, @JsonProperty("MinutesSinceBHUpdated") int minutesSinceBHUpdated,
-                        @JsonProperty("LastChecked") ZonedDateTime lastChecked, @JsonProperty("IsActive") boolean isActive) {
+                        @JsonProperty("LastChecked") Instant lastChecked, @JsonProperty("IsActive") boolean isActive) {
         this.currency = currency;
         this.depositQueueDepth = depositQueueDepth;
         this.withdrawQueueDepth = withdrawQueueDepth;
@@ -71,7 +71,7 @@ public class WalletHealth {
         return minutesSinceBHUpdated;
     }
 
-    public ZonedDateTime getLastChecked() {
+    public Instant getLastChecked() {
         return lastChecked;
     }
 

@@ -8,12 +8,16 @@ public class OrderDelta {
 
     private final String accountUuid;
     private final int nonce;
-    private final OrderType type;
+    private final OrderDeltaType type;
     private final Order order;
 
     @JsonCreator
-    public OrderDelta(@JsonProperty("AccountUuid") @JsonAlias("w")String accountUuid, @JsonProperty("Nonce") @JsonAlias("N") int nonce,
-                      @JsonProperty("Type") @JsonAlias("TY")OrderType type, @JsonProperty("Order") @JsonAlias("o") Order order) {
+    public OrderDelta(
+        @JsonProperty("AccountUuid") @JsonAlias("w") String accountUuid,
+        @JsonProperty("Nonce") @JsonAlias("N") int nonce,
+        @JsonProperty("Type") @JsonAlias("TY") OrderDeltaType type,
+        @JsonProperty("Order") @JsonAlias("o") Order order
+    ) {
         this.accountUuid = accountUuid;
         this.nonce = nonce;
         this.type = type;
@@ -28,7 +32,7 @@ public class OrderDelta {
         return nonce;
     }
 
-    public OrderType getType() {
+    public OrderDeltaType getType() {
         return type;
     }
 

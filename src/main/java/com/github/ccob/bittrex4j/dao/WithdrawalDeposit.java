@@ -3,7 +3,7 @@ package com.github.ccob.bittrex4j.dao;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.time.ZonedDateTime;
+import java.time.Instant;
 
 /**
  * Created by ceri on 24/11/2017.
@@ -14,7 +14,7 @@ public class WithdrawalDeposit {
     private String currency;
     private double amount;
     private String address;
-    private ZonedDateTime opened;
+    private Instant opened;
     private boolean authorized;
     private boolean pendingPayment;
     private double txCost;
@@ -22,16 +22,24 @@ public class WithdrawalDeposit {
     private boolean cancelled;
     private boolean invalidAddress;
     private int confirmations;
-    private ZonedDateTime lastUpdated;
+    private Instant lastUpdated;
 
     @JsonCreator
-    public WithdrawalDeposit(@JsonProperty("Id") String paymentUuid, @JsonProperty("Currency") String currency,
-                             @JsonProperty("Amount") double amount, @JsonProperty("CryptoAddress") String address,
-                             @JsonProperty("Opened") ZonedDateTime opened, @JsonProperty("Authorized") boolean authorized,
-                             @JsonProperty("PendingPayment") boolean pendingPayment, @JsonProperty("TxCost") double txCost,
-                             @JsonProperty("TxId") String txId, @JsonProperty("Canceled") boolean cancelled,
-                             @JsonProperty("InvalidAddress") boolean invalidAddress, @JsonProperty("Confirmations") int confirmations,
-                             @JsonProperty("LastUpdated") ZonedDateTime lastUpdated) {
+    public WithdrawalDeposit(
+        @JsonProperty("Id") String paymentUuid,
+        @JsonProperty("Currency") String currency,
+        @JsonProperty("Amount") double amount,
+        @JsonProperty("CryptoAddress") String address,
+        @JsonProperty("Opened") Instant opened,
+        @JsonProperty("Authorized") boolean authorized,
+        @JsonProperty("PendingPayment") boolean pendingPayment,
+        @JsonProperty("TxCost") double txCost,
+        @JsonProperty("TxId") String txId,
+        @JsonProperty("Canceled") boolean cancelled,
+        @JsonProperty("InvalidAddress") boolean invalidAddress,
+        @JsonProperty("Confirmations") int confirmations,
+        @JsonProperty("LastUpdated") Instant lastUpdated
+    ) {
         this.paymentUuid = paymentUuid;
         this.currency = currency;
         this.amount = amount;
@@ -63,7 +71,7 @@ public class WithdrawalDeposit {
         return address;
     }
 
-    public ZonedDateTime getOpened() {
+    public Instant getOpened() {
         return opened;
     }
 
@@ -95,7 +103,7 @@ public class WithdrawalDeposit {
         return confirmations;
     }
 
-    public ZonedDateTime getLastUpdated() {
+    public Instant getLastUpdated() {
         return lastUpdated;
     }
 }

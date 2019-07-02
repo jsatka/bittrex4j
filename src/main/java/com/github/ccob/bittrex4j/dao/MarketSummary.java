@@ -12,13 +12,11 @@
 package com.github.ccob.bittrex4j.dao;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
-import com.github.ccob.bittrex4j.DateTimeDeserializer;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import java.math.BigDecimal;
-import java.time.ZonedDateTime;
+import java.time.Instant;
 
 /**
  * Created by ceri on 09/09/2017.
@@ -52,8 +50,7 @@ public class MarketSummary {
 
     @JsonProperty("TimeStamp")
     @JsonAlias("T")
-    @JsonDeserialize(using = DateTimeDeserializer.class)
-    ZonedDateTime timeStamp;
+    Instant timestamp;
 
     @JsonProperty("Bid")
     @JsonAlias("B")
@@ -77,8 +74,7 @@ public class MarketSummary {
 
     @JsonProperty("Created")
     @JsonAlias("x")
-    @JsonDeserialize(using = DateTimeDeserializer.class)
-    ZonedDateTime created;
+    Instant created;
 
     public MarketSummary(){}
 
@@ -111,8 +107,8 @@ public class MarketSummary {
         return baseVolume;
     }
 
-    public ZonedDateTime getTimeStamp() {
-        return timeStamp;
+    public Instant getTimestamp() {
+        return timestamp;
     }
 
     public BigDecimal getBid() {
@@ -135,7 +131,7 @@ public class MarketSummary {
         return prevDay;
     }
 
-    public ZonedDateTime getCreated() {
+    public Instant getCreated() {
         return created;
     }
 }

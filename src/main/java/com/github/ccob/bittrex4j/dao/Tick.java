@@ -15,11 +15,11 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.time.ZonedDateTime;
+import java.time.Instant;
 
 public class Tick {
 
-    private ZonedDateTime startTime;
+    private Instant startTime;
     private double open;
     private double high;
     private double low;
@@ -28,7 +28,7 @@ public class Tick {
     private double baseVolume;
 
     @JsonCreator
-    public Tick(@JsonProperty("T") @JsonFormat (shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss[.SSS][Z]", timezone="UTC") ZonedDateTime startTime,
+    public Tick(@JsonProperty("T") @JsonFormat (shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss[.SSS][Z]", timezone="UTC") Instant startTime,
                 @JsonProperty("O") double open, @JsonProperty("H") double high, @JsonProperty("L") double low, @JsonProperty("C") double close,
                 @JsonProperty("V")double volume, @JsonProperty("BV") double baseVolume){
         this.startTime = startTime;
@@ -40,7 +40,7 @@ public class Tick {
         this.baseVolume = baseVolume;
     }
 
-    public ZonedDateTime getStartTime() {
+    public Instant getStartTime() {
         return startTime;
     }
 
