@@ -11,49 +11,21 @@
 
 package com.github.ccob.bittrex4j.dao;
 
-//{
-//
-//        "AccountId" : null,
-//        "OrderUuid" : "0cb4c4e4-bdc7-4e13-8c13-430e587d2cc1",
-//        "Exchange" : "BTC-SHLD",
-//        "Type" : "LIMIT_BUY",
-//        "Quantity" : 1000.00000000,
-//        "QuantityRemaining" : 1000.00000000,
-//        "Limit" : 0.00000001,
-//        "Reserved" : 0.00001000,
-//        "ReserveRemaining" : 0.00001000,
-//        "CommissionReserved" : 0.00000002,
-//        "CommissionReserveRemaining" : 0.00000002,
-//        "CommissionPaid" : 0.00000000,
-//        "Price" : 0.00000000,
-//        "PricePerUnit" : null,
-//        "Opened" : "2014-07-13T07:45:46.27",
-//        "Closed" : null,
-//        "IsOpen" : true,
-//        "Sentinel" : "6c454604-22e2-4fb4-892e-179eede20972",
-//        "CancelInitiated" : false,
-//        "ImmediateOrCancel" : false,
-//        "IsConditional" : false,
-//        "Condition" : "NONE",
-//        "ConditionTarget" : null
-//        }
-
-
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.time.ZonedDateTime;
+import java.time.Instant;
 import java.math.BigDecimal;
 
-@JsonIgnoreProperties("Uuid")
+@JsonIgnoreProperties({"AccountUuid", "PassthroughUuid"})
 public class Order {
-    private String accountId;
+    private String uuid;
     private String orderUuid;
+    private Long id;
     private String exchange;
     private String type;
-    private Long id;
     private BigDecimal quantity;
     private BigDecimal quantityRemaining;
     private BigDecimal limit;
@@ -64,9 +36,9 @@ public class Order {
     private BigDecimal commissionPaid;
     private BigDecimal price;
     private BigDecimal pricePerUnit;
-    private ZonedDateTime opened;
-    private ZonedDateTime closed;
-    private ZonedDateTime updated;
+    private Instant opened;
+    private Instant closed;
+    private Instant updated;
     private boolean open;
     private String sentinel;
     private boolean cancelInitiated;
@@ -76,33 +48,34 @@ public class Order {
     private String conditionTarget;
 
     @JsonCreator
-    public Order(@JsonProperty("AccountId") @JsonAlias("U") String accountId,
-                 @JsonProperty("OrderUuid") @JsonAlias("OU") String orderUuid,
-                 @JsonProperty("Id") @JsonAlias("I") Long id,
-                 @JsonProperty("Exchange") @JsonAlias("E") String exchange,
-                 @JsonProperty("OrderType") @JsonAlias({"Type","OT"}) String type,
-                 @JsonProperty("Quantity") @JsonAlias("Q") BigDecimal quantity,
-                 @JsonProperty("QuantityRemaining") @JsonAlias("q") BigDecimal quantityRemaining,
-                 @JsonProperty("Limit") @JsonAlias("X") BigDecimal limit,
-                 @JsonProperty("Reserved") BigDecimal reserved,
-                 @JsonProperty("ReserveRemaining") BigDecimal reserveRemaining,
-                 @JsonProperty("CommissionReserved") BigDecimal commissionReserved,
-                 @JsonProperty("CommissionReserveRemaining") BigDecimal commissionReserveRemaining,
-                 @JsonProperty("CommissionPaid") @JsonAlias({"Commission","n"}) BigDecimal commissionPaid,
-                 @JsonProperty("Price") @JsonAlias("P") BigDecimal price,
-                 @JsonProperty("PricePerUnit") @JsonAlias("PU") BigDecimal pricePerUnit,
-                 @JsonProperty("Opened") @JsonAlias({"TimeStamp","Y"}) ZonedDateTime opened,
-                 @JsonProperty("Closed") @JsonAlias("C") ZonedDateTime closed,
-                 @JsonProperty("IsOpen") @JsonAlias("i") boolean open,
-                 @JsonProperty("Sentinel") String sentinel,
-                 @JsonProperty("CancelInitiated") @JsonAlias("CI") boolean cancelInitiated,
-                 @JsonProperty("ImmediateOrCancel") @JsonAlias("K") boolean immediateOrCancel,
-                 @JsonProperty("IsConditional") @JsonAlias("k") boolean conditional,
-                 @JsonProperty("Condition") @JsonAlias("J") String condition,
-                 @JsonProperty("ConditionTarget") @JsonAlias("j") String conditionTarget,
-                 @JsonProperty("Updated") @JsonAlias("u") ZonedDateTime updated) {
-        
-        this.accountId = accountId;
+    public Order(
+        @JsonProperty("Uuid") @JsonAlias("U") String uuid,
+        @JsonProperty("OrderUuid") @JsonAlias("OU") String orderUuid,
+        @JsonProperty("Id") @JsonAlias("I") Long id,
+        @JsonProperty("Exchange") @JsonAlias("E") String exchange,
+        @JsonProperty("OrderType") @JsonAlias({"Type","OT"}) String type,
+        @JsonProperty("Quantity") @JsonAlias("Q") BigDecimal quantity,
+        @JsonProperty("QuantityRemaining") @JsonAlias("q") BigDecimal quantityRemaining,
+        @JsonProperty("Limit") @JsonAlias("X") BigDecimal limit,
+        @JsonProperty("Reserved") BigDecimal reserved,
+        @JsonProperty("ReserveRemaining") BigDecimal reserveRemaining,
+        @JsonProperty("CommissionReserved") BigDecimal commissionReserved,
+        @JsonProperty("CommissionReserveRemaining") BigDecimal commissionReserveRemaining,
+        @JsonProperty("CommissionPaid") @JsonAlias({"Commission","n"}) BigDecimal commissionPaid,
+        @JsonProperty("Price") @JsonAlias("P") BigDecimal price,
+        @JsonProperty("PricePerUnit") @JsonAlias("PU") BigDecimal pricePerUnit,
+        @JsonProperty("Opened") @JsonAlias({"TimeStamp","Y"}) Instant opened,
+        @JsonProperty("Closed") @JsonAlias("C") Instant closed,
+        @JsonProperty("IsOpen") @JsonAlias("i") boolean open,
+        @JsonProperty("Sentinel") String sentinel,
+        @JsonProperty("CancelInitiated") @JsonAlias("CI") boolean cancelInitiated,
+        @JsonProperty("ImmediateOrCancel") @JsonAlias("K") boolean immediateOrCancel,
+        @JsonProperty("IsConditional") @JsonAlias("k") boolean conditional,
+        @JsonProperty("Condition") @JsonAlias("J") String condition,
+        @JsonProperty("ConditionTarget") @JsonAlias("j") String conditionTarget,
+        @JsonProperty("Updated") @JsonAlias("u") Instant updated
+    ) {    
+        this.uuid = uuid;
         this.orderUuid = orderUuid;
         this.id = id;
         this.exchange = exchange;
@@ -129,12 +102,16 @@ public class Order {
         this.updated = updated;
     }
 
-    public String getAccountId() {
-        return accountId;
+    public String getUuid() {
+        return uuid;
     }
 
     public String getOrderUuid() {
         return orderUuid;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getExchange() {
@@ -189,11 +166,11 @@ public class Order {
         return pricePerUnit;
     }
 
-    public ZonedDateTime getOpened() {
+    public Instant getOpened() {
         return opened;
     }
 
-    public ZonedDateTime getClosed() {
+    public Instant getClosed() {
         return closed;
     }
 
@@ -225,11 +202,7 @@ public class Order {
         return conditionTarget;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public ZonedDateTime getUpdated() {
+    public Instant getUpdated() {
         return updated;
     }
 }

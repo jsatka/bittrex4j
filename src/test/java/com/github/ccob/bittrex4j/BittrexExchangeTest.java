@@ -13,8 +13,8 @@ package com.github.ccob.bittrex4j;
 
 import com.github.ccob.bittrex4j.dao.*;
 import com.github.signalr4j.client.hubs.*;
-import com.google.gson.Gson;
-import com.google.gson.internal.LinkedTreeMap;
+// import com.google.gson.Gson;
+// import com.google.gson.internal.LinkedTreeMap;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -405,15 +405,15 @@ public class BittrexExchangeTest {
         verify(mockHubProxy).on(eq("uO"), subscriptionHandlerArgumentCaptorString.capture(), eq(String.class));
 
         bittrexExchange.onOrderStateChange(orderDelta -> {
-            assertThat(orderDelta.getNonce(), equalTo(3));
-            assertThat(orderDelta.getAccountUuid(),equalTo("74855331-e517-4ae7-bcf6-c5992c2db2ff"));
-            assertThat(orderDelta.getOrder(),is(notNullValue()));
-            assertThat(orderDelta.getOrder().getExchange(),equalTo("BTC-ETH"));
-            lambdaCalled=true;
+            assertThat(orderDelta.getNonce(), equalTo(1));
+            assertThat(orderDelta.getAccountUuid(), equalTo("834a555f-7c5e-4c16-b17d-6eafc8133055"));
+            assertThat(orderDelta.getOrder(), is(notNullValue()));
+            assertThat(orderDelta.getOrder().getExchange(), equalTo("BTC-BCH"));
+            lambdaCalled = true;
         });
 
         subscriptionHandlerArgumentCaptorString.getValue().run(loadTestResourceAsString("/OrderDelta.json"));
-        assertThat(lambdaCalled,is(true));
+        assertThat(lambdaCalled, is(true));
 
     }
 }

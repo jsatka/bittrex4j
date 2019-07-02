@@ -12,7 +12,7 @@
 package com.github.ccob.bittrex4j;
 
 import com.github.signalr4j.client.Logger;
-import com.github.signalr4j.client.Platform;
+// import com.github.signalr4j.client.Platform;
 import com.github.signalr4j.client.hubs.HubConnection;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.protocol.HttpClientContext;

@@ -12,8 +12,12 @@ public class OrderDelta {
     private final Order order;
 
     @JsonCreator
-    public OrderDelta(@JsonProperty("AccountUuid") @JsonAlias("w")String accountUuid, @JsonProperty("Nonce") @JsonAlias("N") int nonce,
-                      @JsonProperty("Type") @JsonAlias("TY")OrderDeltaType type, @JsonProperty("Order") @JsonAlias("o") Order order) {
+    public OrderDelta(
+        @JsonProperty("AccountUuid") @JsonAlias("w") String accountUuid,
+        @JsonProperty("Nonce") @JsonAlias("N") int nonce,
+        @JsonProperty("Type") @JsonAlias("TY") OrderDeltaType type,
+        @JsonProperty("Order") @JsonAlias("o") Order order
+    ) {
         this.accountUuid = accountUuid;
         this.nonce = nonce;
         this.type = type;

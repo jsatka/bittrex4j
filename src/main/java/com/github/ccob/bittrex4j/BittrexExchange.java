@@ -11,17 +11,21 @@
 
 package com.github.ccob.bittrex4j;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.math.BigDecimal;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.time.Instant;
+import java.util.*;
+import java.util.stream.Collectors;
+import javax.script.ScriptException;
+
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
-import com.github.ccob.bittrex4j.cloudflare.CloudFlareAuthorizer;
-import com.github.ccob.bittrex4j.dao.*;
-import com.github.ccob.bittrex4j.dao.Currency;
-import com.github.ccob.bittrex4j.listeners.InvocationResult;
-import com.github.ccob.bittrex4j.listeners.Listener;
-import com.github.ccob.bittrex4j.listeners.UpdateExchangeStateListener;
-import com.github.ccob.bittrex4j.listeners.UpdateSummaryStateListener;
 import com.github.signalr4j.client.ConnectionState;
 import com.github.signalr4j.client.Platform;
 import com.github.signalr4j.client.hubs.HubConnection;
@@ -39,16 +43,13 @@ import org.apache.http.client.protocol.HttpClientContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.script.ScriptException;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.math.BigDecimal;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
-import java.time.ZonedDateTime;
-import java.util.*;
-import java.util.stream.Collectors;
+import com.github.ccob.bittrex4j.cloudflare.CloudFlareAuthorizer;
+import com.github.ccob.bittrex4j.dao.*;
+import com.github.ccob.bittrex4j.dao.Currency;
+import com.github.ccob.bittrex4j.listeners.InvocationResult;
+import com.github.ccob.bittrex4j.listeners.Listener;
+import com.github.ccob.bittrex4j.listeners.UpdateExchangeStateListener;
+import com.github.ccob.bittrex4j.listeners.UpdateSummaryStateListener;
 
 public class BittrexExchange implements AutoCloseable {
 
@@ -133,7 +134,7 @@ public class BittrexExchange implements AutoCloseable {
 
         mapper = new ObjectMapper();
         SimpleModule module = new SimpleModule();
-        module.addDeserializer(ZonedDateTime.class, new DateTimeDeserializer());
+        module.addDeserializer(Instant.class, new InstantDeserializer());
         mapper.registerModule(module);
 
         updateExchangeStateType = mapper.getTypeFactory().constructType(UpdateExchangeState.class);

@@ -14,7 +14,7 @@ package com.github.ccob.bittrex4j.dao;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.time.ZonedDateTime;
+import java.time.Instant;
 
 /**
  * Created by ceri on 29/10/2017.
@@ -29,7 +29,7 @@ public class Market {
     private double minTradeSize;
     private String marketName;
     private boolean isActive;
-    private ZonedDateTime created;
+    private Instant created;
     private String notice;
     private boolean isSponsored;
     private String logoUrl;
@@ -39,7 +39,7 @@ public class Market {
     public Market( @JsonProperty("MarketCurrency") String marketCurrency, @JsonProperty("BaseCurrency") String baseCurrency,
                    @JsonProperty("MarketCurrencyLong") String marketCurrencyLong, @JsonProperty("BaseCurrencyLong") String baseCurrencyLong, @JsonProperty("MinTradeSize") double minTradeSize,
                    @JsonProperty("MarketName") String marketName, @JsonProperty("IsActive") boolean isActive,
-                   @JsonProperty("Created") ZonedDateTime created, @JsonProperty("Notice") String notice,
+                   @JsonProperty("Created") Instant created, @JsonProperty("Notice") String notice,
                    @JsonProperty("IsSponsored") boolean isSponsored, @JsonProperty("LogoUrl") String logoUrl, @JsonProperty("IsRestricted") boolean isRestricted) {
         this.marketCurrency = marketCurrency;
         this.baseCurrency = baseCurrency;
@@ -87,7 +87,7 @@ public class Market {
         return isActive;
     }
 
-    public ZonedDateTime getCreated() {
+    public Instant getCreated() {
         return created;
     }
 

@@ -2,7 +2,7 @@
   "success" : true,
   "message" : "",
   "result" : {
-    "AccountId" : null,
+    "Uuid" : "e387b346-5af5-4995-a4a8-4d44c038f544",
     "OrderUuid" : "e606d53c-8d70-11e3-94b5-425861b86ab6",
     "Exchange" : "BTC-SHLD",
     "Type" : "LIMIT_BUY",

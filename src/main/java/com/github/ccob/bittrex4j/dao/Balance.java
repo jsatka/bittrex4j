@@ -16,7 +16,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.math.BigDecimal;
-import java.time.ZonedDateTime;
+import java.time.Instant;
 
 public class Balance {
     private String currency;
@@ -26,7 +26,7 @@ public class Balance {
     private String cryptoAddress;
     private boolean requested;
     private String uuid;
-    private ZonedDateTime updated;
+    private Instant updated;
     private Boolean autoSell;
     private Long accountId;
 
@@ -34,7 +34,7 @@ public class Balance {
     public Balance(@JsonProperty("AccountId") @JsonAlias("W") Long accountId, @JsonProperty("Currency") @JsonAlias("c") String currency, @JsonProperty("Balance") @JsonAlias("b") BigDecimal balance,
                    @JsonProperty("Available") @JsonAlias("a") BigDecimal available, @JsonProperty("Pending") @JsonAlias("z") BigDecimal pending,
                    @JsonProperty("CryptoAddress") @JsonAlias("p") String cryptoAddress, @JsonProperty("Requested") @JsonAlias("r") boolean requested,
-                   @JsonProperty("Uuid") @JsonAlias("U") String uuid, @JsonProperty("u") ZonedDateTime updated, @JsonProperty("h") Boolean autoSell) {
+                   @JsonProperty("Uuid") @JsonAlias("U") String uuid, @JsonProperty("u") Instant updated, @JsonProperty("h") Boolean autoSell) {
         this.currency = currency;
         this.balance = balance;
         this.available = available;
@@ -75,7 +75,7 @@ public class Balance {
         return uuid;
     }
 
-    public ZonedDateTime getUpdated() {
+    public Instant getUpdated() {
         return updated;
     }
 

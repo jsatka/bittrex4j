@@ -20,7 +20,10 @@ public class WalletHealthResult {
     private Currency currency;
 
     @JsonCreator
-    public WalletHealthResult(@JsonProperty("Health") WalletHealth health, @JsonProperty("Currency") Currency currency){
+    public WalletHealthResult(
+        @JsonProperty("Health") WalletHealth health,
+        @JsonProperty("Currency") Currency currency
+    ){
         this.health = health;
         this.currency = currency;
     }
