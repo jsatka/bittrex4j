@@ -27,7 +27,7 @@ public class Fill {
     BigDecimal quantity;
     BigDecimal total;
     Instant timestamp;
-    Integer fillId;
+    Long fillId;
 
     @JsonCreator
     public Fill(
@@ -45,7 +45,7 @@ public class Fill {
         @Nullable
         @JsonProperty("FillType")
         @JsonAlias("F") String fillType,
-            
+
         @Nullable
         @JsonProperty("Price")
         @JsonAlias("P") BigDecimal price,
@@ -64,9 +64,8 @@ public class Fill {
         @JsonProperty("TimeStamp")
         @JsonAlias("T") Instant timestamp,
 
-        @Nullable
         @JsonProperty("FillId")
-        @JsonAlias("FI") Integer fillId,
+        @JsonAlias("FI") Long fillId,
 
         @Nullable
         @JsonProperty("FillUuid")
@@ -75,6 +74,9 @@ public class Fill {
         if (rate == null && price == null) {
             throw new IllegalArgumentException("Either rate or price should be set");
         }
+        if (rate != null && price != null) {
+            throw new IllegalArgumentException("Both rate and price cannot be set at the same time");
+        }
 
         this.id = id;
         this.fillId = fillId;
@@ -82,22 +84,11 @@ public class Fill {
         this.quantity = quantity;
         this.timestamp = timestamp;
 
-        if (price != null) {
-            this.price = price;
-        }
+        if (price != null) this.price = price;
+        else               this.price = rate;
 
-        if (rate != null) {
-            if (price != null) {
-                throw new IllegalArgumentException("Both rate and price cannot be set at the same time");
-            }
-            this.price = rate;
-        }
-
-        if (total != null) {
-            this.total = total;
-        } else {
-            this.total = this.price.multiply(this.quantity);
-        }
+        if (total != null) this.total = total;
+        else               this.total = this.price.multiply(this.quantity);
     }
     
     public Long getId() {
@@ -128,7 +119,7 @@ public class Fill {
         return timestamp;
     }
 
-    public int getFillId() {
+    public Long getFillId() {
         return fillId;
     }
 }

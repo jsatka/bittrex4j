@@ -62,8 +62,8 @@ public class DaoTests {
     }
 
     private void assertPojoMethodsForFill(Method method[]) {
-        final Object[] constructorParameters = { 1L, null, "string1", "string2", BigDecimal.valueOf(2), null, BigDecimal.valueOf(4.0), BigDecimal.valueOf(5), Instant.now(), Integer.valueOf(2), null };
-        final Class[] constructorParameterTypes = { Long.class, String.class, String.class, String.class, BigDecimal.class, BigDecimal.class, BigDecimal.class, BigDecimal.class, Instant.class, Integer.class, String.class };
+        final Object[] constructorParameters = { 1L, null, "string1", "string2", BigDecimal.valueOf(2), null, BigDecimal.valueOf(4.0), BigDecimal.valueOf(5), Instant.now(), 2L, null };
+        final Class[] constructorParameterTypes = { Long.class, String.class, String.class, String.class, BigDecimal.class, BigDecimal.class, BigDecimal.class, BigDecimal.class, Instant.class, Long.class, String.class };
         assertPojoMethodsFor(classUnderTest)
                 .create(classUnderTest, constructorParameters, constructorParameterTypes)
                 .testing(method)
