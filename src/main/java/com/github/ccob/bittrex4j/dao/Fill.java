@@ -27,7 +27,7 @@ public class Fill {
     BigDecimal quantity;
     BigDecimal total;
     Instant timestamp;
-    Integer fillId;
+    Long fillId;
 
     @JsonCreator
     public Fill(
@@ -64,9 +64,8 @@ public class Fill {
         @JsonProperty("TimeStamp")
         @JsonAlias("T") Instant timestamp,
 
-        @Nullable
         @JsonProperty("FillId")
-        @JsonAlias("FI") Integer fillId,
+        @JsonAlias("FI") Long fillId,
 
         @Nullable
         @JsonProperty("FillUuid")
@@ -128,7 +127,7 @@ public class Fill {
         return timestamp;
     }
 
-    public int getFillId() {
+    public Long getFillId() {
         return fillId;
     }
 }
