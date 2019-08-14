@@ -236,10 +236,10 @@ public class BittrexExchange implements AutoCloseable {
                   updateExchangeStateListener
                       .onEvent(mapper.readerFor(updateExchangeStateType).readValue(decode(exchangeState)));
                 });
-  }
+    }
 
     public void disconnectFromWebSocket(){
-        hubConnection.stop();
+        hubConnection.disconnect();
     }
 
     private void connectedToWebSocket(){
